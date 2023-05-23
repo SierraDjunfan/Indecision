@@ -1,7 +1,12 @@
 import React from 'react';
 
-function IdeaListComponent() {
+interface IdeaListProps {
+
+}
+
+function IdeaListComponent(props: IdeaListProps) {
   return (<div>
+    <hr></hr>
     
   </div>
   )
