@@ -80,8 +80,12 @@ export const App = () => {
   }
 
   const removeIdea = (idea: Idea) => {
+
     const newIdeas = state.ideas.filter( i => i != idea)
-    setState({...state, ideas: newIdeas})
+    const allTagsInUse = newIdeas.map( i => i.tags).flatMap(i => i)
+    const tagsToDelete = idea.tags.filter( i => !allTagsInUse.includes(i))
+    const newTags = state.tags.filter( t => !tagsToDelete.includes(t.name))
+    setState({...state, ideas: newIdeas, tags: newTags})
   }
 
   const addToShortlist = (idea: Idea) => {
@@ -130,9 +134,14 @@ export const App = () => {
     setState({...state, ideas: newIdeasList, shortlist: newShortlist, knockedOutList: newKnockedOutList, tags: newTags})
   }
 
+  const clearSavedData = () => {
+    setState(initialState)
+  }
+
   return (
     <div className="App">
       <button onClick={() => resetIdeasAndFilter()}>Reset Ideas</button>
+      <button onClick={() => clearSavedData()}>Clear Saved Data</button>
       <Filter tags={state.tags} onTagSelection={handleTagSelection} />
       <div className="lists-container">
         <IdeaList tagFieldInput={state.tagFieldInput} tagFieldWasUpdated={tagFieldWasUpdated} ideaInputWasUpdated={ideaTextWasUpdated} ideaInput={state.newIdeaInput} ideas={filteredIdeas()} onAdd={addIdea} onRemove={removeIdea} onShortlist={addToShortlist} />
