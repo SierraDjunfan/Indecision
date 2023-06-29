@@ -34,7 +34,19 @@ const initialState: AppState = {
 
 export const App = () => {
 
-  const [state, setState] = useState(initialState)
+  const [state, setState] = useState(() => {
+    const savedState = localStorage.getItem('state');
+    if (savedState !== null) {
+      return JSON.parse(savedState) as AppState;
+    } else {
+      return initialState;
+    }
+  });
+
+  useEffect(() => {
+    // Save the current state to local storage whenever it changes.
+    localStorage.setItem('state', JSON.stringify(state));
+  }, [state]);
 
   const addIdea = () => {
     if (newIdeaAlreadyExists(state.newIdeaInput)) {
