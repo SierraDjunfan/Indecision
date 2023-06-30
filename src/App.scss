@@ -1,0 +1,278 @@
+// {"color100":"#43B4D8","color200":"#146396","color300":"#133857"}
+
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Inter&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#filter {
+    padding-top: 1em;
+    padding-bottom: 0.5em;
+    background-color: #f0f0f0;
+    
+}
+
+.idea {
+    display: grid;
+    grid-template-columns: 0.15fr 0.7fr 2.5fr;
+    font-family: 'Fjalla One', sans-serif;
+    align-items: center;
+    grid-auto-rows: 2.4em;
+}
+
+.SquareButton {
+    font-family: 'Fjalla One', sans-serif;
+    outline: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 16px;
+    height: 20px;
+    width: 20px;
+    border: none;
+    color: #fff;
+    background-color: #146396;
+    transition: background-color .17s ease,color .17s ease;
+    &:hover {
+        background-color: #3781b3;
+    }
+}
+
+.selectedTag {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 2px;
+    background-color: #146396;
+    color: #f5fcff;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Fjalla One', sans-serif;
+}
+
+.deselectedTag {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 2px;
+    background-color: transparent;
+    color: #272c3480;
+    border: 2px solid #272c3455;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Fjalla One', sans-serif;
+}
+
+#add-idea {
+    background-color: #f0f0f0;
+    gap: 1.1em;
+    width: 100%;
+    height: 6em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: center;
+    padding-left: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    margin-bottom: 1em;
+}
+
+textarea {
+    height: 3em;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.4em;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 4px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    text-transform: uppercase;
+    :focus{
+        color: #212529;
+        background-color: #fff;
+        border-color: #133857;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+}
+
+input {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.4em;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 4px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    text-transform: uppercase;
+    :focus{
+        color: #212529;
+        background-color: #fff;
+        border-color: #133857;
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+}
+
+.LogoHeading {
+    color: #E1F2F6;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 3em;
+}
+
+h2 {
+    color: #133857;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.5em;
+}
+
+h3 {
+    color: #E1F2F6;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.7em;
+    font-weight: 10;
+}
+
+#header {
+    gap: 1.1em;
+    width: 100%;
+    background-color: #133857;
+    height: 4em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    padding-left: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+#mainListArea {
+    flex-grow: 1;
+    display: flex;
+    height: 75vh;
+}
+
+#ideasList, #shortList {
+    padding-left: 1em;
+    width: 50%;
+    height: 100%;
+}
+
+#ideasList {
+    background-color: #2a2f3b;
+    // #272c34
+}
+
+#shortList {
+    padding-left: 2em;
+    background-color: #232733;
+}
+
+#knockedOutList {
+    flex-grow: 1;
+    width: 100%;
+    background-color: #c0c0c0;
+}
+
+.basicButton {
+    font-family: 'Fjalla One', sans-serif;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 1.3em;
+    font-weight: 500;
+    line-height: 16px;
+    padding: 2px 16px;
+    height: 38px;
+    min-width: 96px;
+    min-height: 38px;
+    border: none;
+    color: #fff;
+    background-color: #146396;
+    transition: background-color .17s ease,color .17s ease;
+    &:hover {
+        background-color: #0f486e;
+    }
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+.blocky-arrow {
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid #E1F2F6;
+}
+
+.DeleteButton {
+    border-radius: 50%;
+    padding: 0.5em;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #E1F2F6;
+    color: #E1F2F6;
+    position: relative;
+  }
+  .DeleteButton:hover {
+    border: 2px solid #E1F2F6;
+    background-color: #133857;
+    color: #ffffff;
+  }
+  
+  .DeleteButton::before {
+    content: " ";
+    position: absolute;
+    display: block;
+    background-color: #E1F2F6;
+    width: 2px;
+    left: 12px;
+    top: 5px;
+    bottom: 5px;
+    transform: rotate(45deg);
+  }
+  .DeleteButton::after {
+    content: " ";
+    position: absolute;
+    display: block;
+    background-color: #E1F2F6;
+    height: 2px;
+    top:12px;
+    left: 5px;
+    right: 5px;
+    transform: rotate(45deg);
+  }

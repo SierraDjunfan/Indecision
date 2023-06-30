@@ -3,6 +3,7 @@ import { Filter } from './Filter';
 import { IdeaList } from './IdeaList';
 import { ShortList } from './Shortlist';
 import { KnockedOutList } from './KnockedOutList';
+import './App.scss';
 
 export interface Idea {
   name: string
@@ -53,17 +54,17 @@ export const App = () => {
       console.log("Cannot add idea. Idea already exists.")
       // Feedback to user
     } else {
-      const parsedTags = parseTagInput(state.tagFieldInput)
+      const parsedTags = parseTagInput(state.tagFieldInput).filter(t => t !== "")
       const justTagNames = state.tags.map( t => t.name)
       const newTags = parsedTags.filter( t => !justTagNames.includes(t))
       const asTagType = newTags.map( t => ({name: t, isSelected: false}))
-      const newIdeas = [...state.ideas, {name: state.newIdeaInput, tags: parsedTags}]
+      const newIdeas = [...state.ideas, {name: state.newIdeaInput.toUpperCase(), tags: parsedTags}]
       setState({...state, ideas: newIdeas, tags: [...state.tags, ...asTagType], newIdeaInput: "", tagFieldInput: ""})
     }
   }
 
   function parseTagInput(input: string) {
-    return input.split(',').map(option => option.trim());
+    return input.split(',').map(option => option.trim().toUpperCase());
   }
 
   function newIdeaAlreadyExists(name: string) {
@@ -80,8 +81,9 @@ export const App = () => {
   }
 
   const removeIdea = (idea: Idea) => {
-
     const newIdeas = state.ideas.filter( i => i != idea)
+
+    //Removes any tags that are no longer used by any ideas
     const allTagsInUse = newIdeas.map( i => i.tags).flatMap(i => i)
     const tagsToDelete = idea.tags.filter( i => !allTagsInUse.includes(i))
     const newTags = state.tags.filter( t => !tagsToDelete.includes(t.name))
@@ -123,7 +125,11 @@ export const App = () => {
   }
 
   const filteredIdeas = () => {
-    return state.ideas.filter( idea => ideaContainsAtLeastOneSelectedTag(idea))
+    if (state.tags.length === 0 || state.tags.filter( t => t.isSelected).length === 0) {
+      return state.ideas
+    } else {
+      return state.ideas.filter( idea => ideaContainsAtLeastOneSelectedTag(idea))
+    }
   }
 
   const resetIdeasAndFilter = () => {
@@ -139,13 +145,23 @@ export const App = () => {
   }
 
   return (
-    <div className="App">
-      <button onClick={() => resetIdeasAndFilter()}>Reset Ideas</button>
-      <button onClick={() => clearSavedData()}>Clear Saved Data</button>
-      <Filter tags={state.tags} onTagSelection={handleTagSelection} />
-      <div className="lists-container">
-        <IdeaList tagFieldInput={state.tagFieldInput} tagFieldWasUpdated={tagFieldWasUpdated} ideaInputWasUpdated={ideaTextWasUpdated} ideaInput={state.newIdeaInput} ideas={filteredIdeas()} onAdd={addIdea} onRemove={removeIdea} onShortlist={addToShortlist} />
-        <ShortList ideas={state.shortlist} onRemove={removeFromShortlist} onKnockOut={addToKnockedOut} />
+    <div id="app">
+      <div id="header">
+        <h1 className='LogoHeading'>INDECISION</h1>
+        <button className="basicButton" onClick={() => resetIdeasAndFilter()}>RESET</button>
+        <button className="basicButton" onClick={() => clearSavedData()}>CLEAR SAVED</button>
+      </div>
+      <div id="mainListArea">
+        <div id="ideasList">
+
+          <Filter tags={state.tags} onTagSelection={handleTagSelection} />
+          <IdeaList tagFieldInput={state.tagFieldInput} tagFieldWasUpdated={tagFieldWasUpdated} ideaInputWasUpdated={ideaTextWasUpdated} ideaInput={state.newIdeaInput} ideas={filteredIdeas()} onAdd={addIdea} onRemove={removeIdea} onShortlist={addToShortlist} />
+        </div>
+        <div id="shortList">
+          <ShortList ideas={state.shortlist} onRemove={removeFromShortlist} onKnockOut={addToKnockedOut} />
+        </div>
+      </div>
+      <div id="knockedOutList">
         <KnockedOutList onMoveToIdeas={moveToIdeas} ideas={state.knockedOutList} />
       </div>
     </div>

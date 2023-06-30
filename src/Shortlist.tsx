@@ -17,7 +17,7 @@ export const ShortList: React.FC<ShortListProps> = ({ ideas, onRemove, onKnockOu
   
     return (
       <div className="shortlist">
-        <h2>Shortlist</h2>
+        <h3>SHORTLIST</h3>
         {ideas.map((idea) => (
           <div key={idea.name} className="shortlisted-idea">
             <h3>{idea.name}</h3>

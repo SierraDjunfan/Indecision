@@ -10,9 +10,9 @@ export const IdeaComponent = (props: IdeaProps) => {
 
     return (
       <div className="idea">
+        <button className="DeleteButton" onClick={() => props.onRemove(props.idea)}>X</button>
         <h3>{props.idea.name}</h3>
-        <button onClick={() => props.onShortlist(props.idea)}>Move to Shortlist</button>
-        <button onClick={() => props.onRemove(props.idea)}>X</button>
+        <button className="blocky-arrow" onClick={() => props.onShortlist(props.idea)}></button>
       </div>
     );
   };

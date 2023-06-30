@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useRef } from 'react';
 import { Idea } from "./App";
 import { IdeaComponent } from "./IdeaComponent";
 
@@ -14,23 +14,34 @@ interface IdeaListProps {
   }
   
 export const IdeaList = (props: IdeaListProps) => {
+
+  const optionField = useRef<HTMLInputElement>(null)
   
     return (
       <div className="idea-list">
-        <h2>Ideas</h2>
-        <div className="add-idea">
+        <div id="add-idea">
           <input
+            ref={optionField}
+            onKeyDown={ e => ( e.key === "Enter" && props.onAdd())}
             type="text"
-            placeholder="Title"
+            placeholder="OPTION"
             value={props.ideaInput}
             onChange={(e) => props.ideaInputWasUpdated(e.target.value)}
           />
           <textarea
+            onKeyDown={ (e) => {
+              if (e.key === "Enter") {
+                if (optionField !== null) {
+                  props.onAdd()
+                  optionField.current?.focus()
+                }
+              }
+            }}
             placeholder="Tags"
             value={props.tagFieldInput}
             onChange={(e) => props.tagFieldWasUpdated(e.target.value)}
           ></textarea>
-          <button onClick={ () => props.onAdd()}>Add Idea</button>
+          <button className="basicButton" onClick={ () => props.onAdd()}>ADD</button>
         </div>
         {props.ideas.map((idea) => (
           <IdeaComponent

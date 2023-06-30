@@ -8,7 +8,7 @@ interface FilterProps {
 export const Filter = (props: FilterProps) => {
   
     return (
-      <div className="filter">
+      <div id="filter">
         <div className="tags">
           {props.tags.map((tag) => (
             <button
