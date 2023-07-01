@@ -103,9 +103,9 @@ export const App = () => {
   }
   
   const addToKnockedOut = (idea: Idea) => {
-    const newShortList = state.shortlist.filter( i => i != idea)
-    const newKnockedOutList = [...state.knockedOutList, idea]
-    setState({...state, shortlist: newShortList, knockedOutList: newKnockedOutList})
+    const newShortlist = state.shortlist.filter( i => i != idea)
+    const newIdeasList = [...state.ideas, idea]
+    setState({...state, shortlist: newShortlist, ideas: newIdeasList})
   }
 
   const moveToIdeas = (idea: Idea) => {
@@ -136,7 +136,7 @@ export const App = () => {
     const newIdeasList = [...state.ideas, ...state.shortlist, ...state.knockedOutList]
     const newShortlist: Idea[] = []
     const newKnockedOutList: Idea[] = []
-    const newTags = state.tags.map( t => ({name: t.name, isSelected: true}))
+    const newTags = state.tags.map( t => ({name: t.name, isSelected: false}))
     setState({...state, ideas: newIdeasList, shortlist: newShortlist, knockedOutList: newKnockedOutList, tags: newTags})
   }
 
@@ -153,7 +153,6 @@ export const App = () => {
       </div>
       <div id="mainListArea">
         <div id="ideasList">
-
           <Filter tags={state.tags} onTagSelection={handleTagSelection} />
           <IdeaList tagFieldInput={state.tagFieldInput} tagFieldWasUpdated={tagFieldWasUpdated} ideaInputWasUpdated={ideaTextWasUpdated} ideaInput={state.newIdeaInput} ideas={filteredIdeas()} onAdd={addIdea} onRemove={removeIdea} onShortlist={addToShortlist} />
         </div>

@@ -20,9 +20,8 @@ export const ShortList: React.FC<ShortListProps> = ({ ideas, onRemove, onKnockOu
         <h3>SHORTLIST</h3>
         {ideas.map((idea) => (
           <div key={idea.name} className="shortlisted-idea">
+            <button onClick={() => handleKnockOut(idea)}>KNOCK OUT</button>
             <h3>{idea.name}</h3>
-            <button onClick={() => handleKnockOut(idea)}>Knock Out</button>
-            <button onClick={() => handleRemove(idea)}>Remove</button>
           </div>
         ))}
       </div>

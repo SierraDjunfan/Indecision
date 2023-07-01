@@ -18,7 +18,7 @@ export const IdeaList = (props: IdeaListProps) => {
   const optionField = useRef<HTMLInputElement>(null)
   
     return (
-      <div className="idea-list">
+      <div id="idea-section">
         <div id="add-idea">
           <input
             ref={optionField}
@@ -43,6 +43,7 @@ export const IdeaList = (props: IdeaListProps) => {
           ></textarea>
           <button className="basicButton" onClick={ () => props.onAdd()}>ADD</button>
         </div>
+        <div className="IdeasContainer">
         {props.ideas.map((idea) => (
           <IdeaComponent
             idea={idea}
@@ -50,6 +51,7 @@ export const IdeaList = (props: IdeaListProps) => {
             onShortlist={props.onShortlist}
           />
         ))}
+        </div>
       </div>
     );
   };

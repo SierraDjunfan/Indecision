@@ -9,7 +9,7 @@ export const Filter = (props: FilterProps) => {
   
     return (
       <div id="filter">
-        <div className="tags">
+        <div className="Tags">
           {props.tags.map((tag) => (
             <button
               key={tag.name}
