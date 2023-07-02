@@ -4,6 +4,7 @@ import { IdeaList } from './IdeaList';
 import { ShortList } from './Shortlist';
 import { KnockedOutList } from './KnockedOutList';
 import './App.scss';
+import { RandomSection } from './RandomSection';
 
 export interface Idea {
   name: string
@@ -21,7 +22,7 @@ interface AppState {
   knockedOutList: Idea[],
   tags: Tag[],
   newIdeaInput: string,
-  tagFieldInput: string
+  tagFieldInput: string,
 }
 
 const initialState: AppState = {
@@ -30,7 +31,7 @@ const initialState: AppState = {
   knockedOutList: [],
   tags: [],
   newIdeaInput: "",
-  tagFieldInput: ""
+  tagFieldInput: "",
 }
 
 export const App = () => {
@@ -144,6 +145,25 @@ export const App = () => {
     setState(initialState)
   }
 
+  const randomlySelect = (num: number) => {
+    if ( num > filteredIdeas().length) {
+      const newShortlist = [...state.shortlist, ...filteredIdeas()]
+      const shortlistNamesOnly = newShortlist.map( i => i.name)
+      const newIdeasList = state.ideas.filter( i => !shortlistNamesOnly.includes(i.name))
+      setState({...state, ideas: newIdeasList, shortlist: newShortlist})
+    } else {
+      const ideasCopy = [...filteredIdeas()]
+      const shuffledIdeas = ideasCopy.sort(() => Math.random() - 0.5)
+      const newShortlist = [...state.shortlist, ...shuffledIdeas.slice(0, num)]
+      const newIdeasList = state.ideas.filter( i => !newShortlist.includes(i))
+      setState({...state, ideas: newIdeasList, shortlist: newShortlist})
+    }
+  }
+
+  function userAddedTag(tag: string) {
+    console.log("Adding tag to text field")
+  }
+
   return (
     <div id="app">
       <div id="header">
@@ -153,15 +173,13 @@ export const App = () => {
       </div>
       <div id="mainListArea">
         <div id="ideasList">
-          <Filter tags={state.tags} onTagSelection={handleTagSelection} />
-          <IdeaList tagFieldInput={state.tagFieldInput} tagFieldWasUpdated={tagFieldWasUpdated} ideaInputWasUpdated={ideaTextWasUpdated} ideaInput={state.newIdeaInput} ideas={filteredIdeas()} onAdd={addIdea} onRemove={removeIdea} onShortlist={addToShortlist} />
+          <Filter userAddedTag={userAddedTag} tags={state.tags} onTagSelection={handleTagSelection} />
+          <IdeaList tags={state.tags} tagFieldInput={state.tagFieldInput} tagFieldWasUpdated={tagFieldWasUpdated} ideaInputWasUpdated={ideaTextWasUpdated} ideaInput={state.newIdeaInput} ideas={filteredIdeas()} onAdd={addIdea} onRemove={removeIdea} onShortlist={addToShortlist} />
         </div>
         <div id="shortList">
+          <RandomSection randomFunction={randomlySelect}></RandomSection>
           <ShortList ideas={state.shortlist} onRemove={removeFromShortlist} onKnockOut={addToKnockedOut} />
         </div>
-      </div>
-      <div id="knockedOutList">
-        <KnockedOutList onMoveToIdeas={moveToIdeas} ideas={state.knockedOutList} />
       </div>
     </div>
   )

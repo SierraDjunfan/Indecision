@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Idea } from "./App";
+import { Idea, Tag } from "./App";
 import { IdeaComponent } from "./IdeaComponent";
 
 interface IdeaListProps {
@@ -11,12 +11,19 @@ interface IdeaListProps {
     ideaInputWasUpdated: (text: string) => void
     tagFieldInput: string
     tagFieldWasUpdated: (text: string) => void
+    tags: Tag[]
   }
   
 export const IdeaList = (props: IdeaListProps) => {
 
+  interface GroupBase<Option> {
+    readonly options: readonly Option[];
+    readonly label?: string;
+  }
+
   const optionField = useRef<HTMLInputElement>(null)
-  
+  const tagOptions = props.tags.map( t => ({ value: t.name, label: t.name }))
+
     return (
       <div id="idea-section">
         <div id="add-idea">

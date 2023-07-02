@@ -6,22 +6,23 @@ interface ShortListProps {
     onKnockOut: (idea: Idea) => void;
   }
 
-export const ShortList: React.FC<ShortListProps> = ({ ideas, onRemove, onKnockOut }) => {
+export const ShortList = (props: ShortListProps) => {
+
     const handleRemove = (idea: Idea) => {
-      onRemove(idea);
+      props.onRemove(idea);
     };
   
     const handleKnockOut = (idea: Idea) => {
-      onKnockOut(idea);
+      props.onKnockOut(idea);
     };
   
     return (
       <div className="shortlist">
         <h3>SHORTLIST</h3>
-        {ideas.map((idea) => (
+        {props.ideas.map((idea) => (
           <div key={idea.name} className="shortlisted-idea">
             <button onClick={() => handleKnockOut(idea)}>KNOCK OUT</button>
-            <h3>{idea.name}</h3>
+            <h3 className={props.ideas.length === 1 ? "glowing-heading" : "normal-heading"}>{idea.name}</h3>
           </div>
         ))}
       </div>

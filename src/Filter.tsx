@@ -1,11 +1,15 @@
+import { useRef } from "react";
 import { Tag } from "./App";
 
 interface FilterProps {
     tags: Tag[]
     onTagSelection: (tag: string) => void
+    userAddedTag: (tag: string) => void
   }
 
 export const Filter = (props: FilterProps) => {
+
+    const tagInputField = useRef(null)
   
     return (
       <div id="filter">
