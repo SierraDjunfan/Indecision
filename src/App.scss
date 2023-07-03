@@ -129,9 +129,55 @@ body, html {
             max-width: 50%vw;
 
             #filter {
+                display: flex;
+                padding-right: $padding-consistent;
+                flex-direction: row;
+                justify-content: flex-end;
                 padding-top: $padding-consistent;
                 padding-bottom: calc($padding-consistent / 2);
                 background-color: $color-background-light;
+
+                input[type=checkbox]{
+                    height: 0;
+                    width: 0;
+                    visibility: hidden;
+                  }
+                  
+                  label {
+                    cursor: pointer;
+                    text-indent: -9999px;
+                    width: 50px;
+                    height: 25px;
+                    background: #272c3480;
+                    display: block;
+                    border-radius: 50px;
+                    position: relative;
+                  }
+                  
+                  label:after {
+                    content: '';
+                    position: absolute;
+                    top: 0.75px;
+                    left: 1.25px;
+                    width: 22.5px;
+                    height: 22.5px;
+                    background: white;
+                    border-radius: 22.5px;
+                    transition: 0.3s;
+                  }
+                  
+                  input:checked + label {
+                    background: $color-dark;
+                  }
+                  
+                  input:checked + label:after {
+                    left: calc(100% - 1.25px);
+                    transform: translateX(-100%);
+                  }
+                  
+                  label:active:after {
+                    width: 32.5px;
+                  }
 
                 .Tags {
                     display: flex;

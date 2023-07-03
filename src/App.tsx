@@ -23,6 +23,7 @@ interface AppState {
   tags: Tag[],
   newIdeaInput: string,
   tagFieldInput: string,
+  tagSwitchIsOn: boolean
 }
 
 const initialState: AppState = {
@@ -32,6 +33,7 @@ const initialState: AppState = {
   tags: [],
   newIdeaInput: "",
   tagFieldInput: "",
+  tagSwitchIsOn: false
 }
 
 export const App = () => {
@@ -161,7 +163,15 @@ export const App = () => {
   }
 
   function userAddedTag(tag: string) {
-    console.log("Adding tag to text field")
+
+    if (!parseTagInput(state.tagFieldInput).includes(tag)) {
+      const newTagFieldInput = state.tagFieldInput === "" ? tag : state.tagFieldInput + `,${tag}`
+      setState({...state, tagFieldInput: newTagFieldInput})
+    }
+  }
+
+  function tagSwitchWasToggled() {
+    setState({...state, tagSwitchIsOn: !state.tagSwitchIsOn})
   }
 
   return (
@@ -173,7 +183,7 @@ export const App = () => {
       </div>
       <div id="mainListArea">
         <div id="ideasList">
-          <Filter userAddedTag={userAddedTag} tags={state.tags} onTagSelection={handleTagSelection} />
+          <Filter tagSwitchIsOn={state.tagSwitchIsOn} tagSwitchWasToggled={tagSwitchWasToggled} userAddedTag={userAddedTag} tags={state.tags} onTagSelection={handleTagSelection} />
           <IdeaList tags={state.tags} tagFieldInput={state.tagFieldInput} tagFieldWasUpdated={tagFieldWasUpdated} ideaInputWasUpdated={ideaTextWasUpdated} ideaInput={state.newIdeaInput} ideas={filteredIdeas()} onAdd={addIdea} onRemove={removeIdea} onShortlist={addToShortlist} />
         </div>
         <div id="shortList">
