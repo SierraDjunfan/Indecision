@@ -165,7 +165,7 @@ export const App = () => {
   function userAddedTag(tag: string) {
 
     if (!parseTagInput(state.tagFieldInput).includes(tag)) {
-      const newTagFieldInput = state.tagFieldInput === "" ? tag : state.tagFieldInput + `,${tag}`
+      const newTagFieldInput = state.tagFieldInput === "" ? tag : state.tagFieldInput + `, ${tag}`
       setState({...state, tagFieldInput: newTagFieldInput})
     }
   }
