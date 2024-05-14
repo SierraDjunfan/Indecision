@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Indecision/static/css/main.bf5d460e.css",
+    "main.css": "/Indecision/static/css/main.abb738fe.css",
     "main.js": "/Indecision/static/js/main.f1030385.js",
     "static/js/787.34873038.chunk.js": "/Indecision/static/js/787.34873038.chunk.js",
     "index.html": "/Indecision/index.html",
-    "main.bf5d460e.css.map": "/Indecision/static/css/main.bf5d460e.css.map",
+    "main.abb738fe.css.map": "/Indecision/static/css/main.abb738fe.css.map",
     "main.f1030385.js.map": "/Indecision/static/js/main.f1030385.js.map",
     "787.34873038.chunk.js.map": "/Indecision/static/js/787.34873038.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bf5d460e.css",
+    "static/css/main.abb738fe.css",
     "static/js/main.f1030385.js"
   ]
 }
