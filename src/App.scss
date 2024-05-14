@@ -192,6 +192,9 @@ body, html {
                         background-color: $color-dark;
                         color: $color-lightest;
                         border: 2px solid transparent;
+                        &:hover {
+                            background-color: #0a2d44; 
+                        }
                     }
                     
                     .deselectedTag {
@@ -201,6 +204,9 @@ body, html {
                         background-color: transparent;
                         color: #272c3480;
                         border: 2px solid #272c3455;
+                        &:hover {
+                            background-color: rgb(220, 220, 220); 
+                        }
                     }
                 }
             }
